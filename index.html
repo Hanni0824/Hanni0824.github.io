@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智力攻击守卫解救王子</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: linear-gradient(to bottom, #4CAF50, #45a049);
+    }
+    #game-container {
+        margin-top: 50px;
+    }
+    #question {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    #options {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .option-button {
+        padding: 12px 24px;
+        margin: 0 10px;
+        font-size: 18px;
+        cursor: pointer;
+        border: none;
+        background-color: #fff;
+        color: #4CAF50;
+        border-radius: 8px;
+        transition: background-color 0.3s, transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .option-button:hover {
+        background-color: #f0f0f0;
+        transform: translateY(-2px);
+    }
+    #result {
+        padding: 20px;
+        border: 2px solid #fff;
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    #result p {
+        margin: 0;
+        font-size: 20px;
+    }
+    #result.correct {
+        border-color: #45a049;
+        background-color: rgba(240, 255, 240, 0.8);
+    }
+    #result.incorrect {
+        border-color: #ff4d4d;
+        background-color: rgba(255, 240, 240, 0.8);
+    }
+    form {
+        margin-top: 20px;
+    }
+    input[type="text"] {
+        padding: 12px;
+        font-size: 18px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        width: 280px;
+        margin-right: 10px;
+    }
+    button[type="submit"] {
+        padding: 12px 24px;
+        font-size: 18px;
+        cursor: pointer;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 8px;
+        transition: background-color 0.3s, transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    button[type="submit"]:hover {
+        background-color: #45a049;
+        transform: translateY(-2px);
+    }
+</style>
+</head>
+<body>
+<div id="game-container">
+    <div id="question">请选择你要对抗的守卫：</div>
+    <div id="options">
+        <button class="option-button" onclick="askQuestion(1)">守卫1</button>
+        <button class="option-button" onclick="askQuestion(2)">守卫2</button>
+        <button class="option-button" onclick="askQuestion(3)">守卫3</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<script>
+    function askQuestion(option) {
+        var resultContainer = document.getElementById('result');
+        resultContainer.innerHTML = '';
+
+        var question, correctAnswer;
+        switch(option) {
+            case 1:
+                question = "第一个守卫看向你：“如果我问你，新华字典有多少个字？（写一个数字即可）”";
+                correctAnswer = "4";
+                break;
+            case 2:
+                question = "第二个守卫看向你：“医生给了我三颗药丸，要我每半小时吃一颗，那么我吃完需要多长时间？”";
+                correctAnswer = "一个小时";
+                break;
+            case 3:
+                question = "第三个守卫看向你：“青蛙吃什么会变成哑巴？”";
+                correctAnswer = "南瓜";
+                break;
+            default:
+                break;
+        }
+
+        resultContainer.innerHTML = '<p>' + question + '</p>';
+        if (correctAnswer) {
+            // 使用HTML表单来接收用户输入
+            var answerForm = '<form onsubmit="checkAnswer(event, \'' + correctAnswer + '\')">';
+            answerForm += '<input type="text" id="userAnswer" placeholder="请输入答案" required>';
+            answerForm += '<button type="submit">提交答案</button>';
+            answerForm += '</form>';
+            resultContainer.innerHTML += answerForm;
+        }
+    }
+
+    function checkAnswer(event, correctAnswer) {
+        event.preventDefault(); // 阻止表单默认提交行为
+
+        var userAnswer = document.getElementById('userAnswer').value.trim();
+        var resultContainer = document.getElementById('result');
+
+        if (userAnswer === correctAnswer) {
+            resultContainer.classList.add('correct');
+            resultContainer.innerHTML += '<p>恭喜你聪明的公主！你找出了正确的答案，可以救出王子啦！</p>';
+        } else {
+            resultContainer.classList.add('incorrect');
+            resultContainer.innerHTML += '<p>就凭你也想来救王子？！</p>';
+        }
+    }
+</script>
+</body>
+</html>
