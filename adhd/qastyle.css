@@ -25,6 +25,7 @@ body {
   width: 100%;
   background-color: #315343;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .text {
@@ -48,6 +49,7 @@ body {
   width: 100%;
   text-align: center; /* 水平居中 */
   margin-bottom: 30px;
+  box-sizing: border-box;
 }
 
 .question {
@@ -59,6 +61,7 @@ body {
 .btn-group {
   display: flex;
   justify-content: center; /* 水平居中 */
+  flex-wrap: wrap;
   gap: 20px; /* 按钮之间的间隙 */
   margin-top: 30px;
 }
@@ -100,6 +103,14 @@ body {
 }
 
 @media (max-width: 600px) {
+  .text {
+    font-size: 1.2em;
+  }
+
+  .text2 {
+    font-size: 0.9em;
+  }
+
   .question {
     font-size: 1.2em;
   }
